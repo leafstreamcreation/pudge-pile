@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 // const authRoutes = require("./auth.routes");
+const mantraRoutes = require("./mantra.routes");
 
 
 router.get("/", (req, res, next) => {
@@ -8,6 +9,7 @@ router.get("/", (req, res, next) => {
 });
 
 // router.use("/auth", authRoutes);
+router.use("/mantra", mantraRoutes);
 
 //add routes for other models here
 
