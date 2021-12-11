@@ -5,11 +5,23 @@ const express = require("express");
 // https://www.npmjs.com/package/morgan
 const logger = require("morgan");
 
+// ℹ️ Needed to accept requests from 'the outside'. CORS stands for cross origin resource sharing
+// unless the request if from the same domain, by default express wont accept POST requests
+const cors = require("cors");
+
 
 // Middleware configuration
 module.exports = (app) => {
   // In development environment the app logs
   app.use(logger("dev"));
+
+  // controls a very specific header to pass headers from the frontend
+  app.use(
+    cors({
+      credentials: true,
+      origin: process.env.ORIGIN || "http://localhost:3000",
+    })
+  );
 
   // To have access to `body` property in the request
   app.use(express.json());
