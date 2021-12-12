@@ -2,13 +2,14 @@ const router = require("express").Router();
 
 const mongoose = require("mongoose");
 
-const Mantra = require("../models/Mantra.model");
+const Task = require("../models/Task.model");
 
 const hasAuth = require("../middleware/hasAuth");
 router.use(hasAuth);
 
+
 router.get("/index", async (req, res) => {
-  const docs = await Mantra.find().exec();
+  const docs = await Task.find().exec();
   return res.status(200).json({ mantras: docs });
 });
 
@@ -17,11 +18,11 @@ router.post("/create", (req, res) => {
   if (!text) return res.status(400).json({ error: "no text provided" });
   //sanitize the text here
   //then save it
-  Mantra.create({ text }).then(() => {
-    return res.status(200).json({ message: "Created New Mantra"});
+  Task.create({ text }).then(() => {
+    return res.status(200).json({ message: "Created New Task"});
   })
   .catch((error) =>
-    res.status(500).json({ errorMessage: "Mantra Creation Failed.", error: error })
+    res.status(500).json({ errorMessage: "Task Creation Failed.", error: error })
   );
 });
 
@@ -30,23 +31,23 @@ router.post("/update/:id", async (req, res) => {
   if (!text) return res.status(400).json({ error: "no text provided" });
   //sanitize the text here
   //then save it
-  Mantra.findByIdAndUpdate(req.params.id, { text }).then(() => {
-    return res.status(200).json({ message: "Updated Mantra"});
+  Task.findByIdAndUpdate(req.params.id, { text }).then(() => {
+    return res.status(200).json({ message: "Updated Task"});
   })
   .catch((error) =>
-    res.status(500).json({ errorMessage: "Mantra Creation Failed.", error: error })
+    res.status(500).json({ errorMessage: "Task Creation Failed.", error: error })
   );
 });
 
 router.post("/delete/:id", (req, res) => {
-  Mantra.findByIdAndDelete(req.params.id)
+  Task.findByIdAndDelete(req.params.id)
       .then(() => {
         return res
           .status(200)
-          .json({ message: "Deleted Mantra" });
+          .json({ message: "Deleted Task" });
       })
       .catch((error) =>
-        res.status(500).json({ errorMessage: "Mantra Deletion Failed.", error: error })
+        res.status(500).json({ errorMessage: "Task Deletion Failed.", error: error })
       );
 });
 
