@@ -10,7 +10,7 @@ router.use(hasAuth);
 
 router.get("/index", async (req, res) => {
   const docs = await Task.find().exec();
-  return res.status(200).json({ mantras: docs });
+  return res.status(200).json({ tasks: docs });
 });
 
 router.post("/create", (req, res) => {
