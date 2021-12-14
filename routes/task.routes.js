@@ -18,8 +18,8 @@ router.post("/create", (req, res) => {
   if (!text) return res.status(400).json({ error: "no text provided" });
   //sanitize the text here
   //then save it
-  Task.create({ text }).then(() => {
-    return res.status(200).json({ message: "Created New Task"});
+  Task.create({ text }).then((task) => {
+    return res.status(200).json(task);
   })
   .catch((error) =>
     res.status(500).json({ errorMessage: "Task Creation Failed.", error: error })
