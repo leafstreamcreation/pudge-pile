@@ -17,11 +17,19 @@ module.exports = (app) => {
   // In development environment the app logs
   app.use(logger("dev"));
 
+  const safeList = [ process.env.ORIGIN, process.env.PHONE_ORIGIN ];
+
   // controls a very specific header to pass headers from the frontend
   app.use(
     cors({
       credentials: true,
-      origin: process.env.ORIGIN || "http://localhost:3000",
+      origin: function (origin, callback) {
+        if (safeList.indexOf(origin) !== -1) {
+          callback(null, true)
+        } else {
+          callback(new Error('Not allowed by CORS'))
+        }
+      }
     })
   );
 
