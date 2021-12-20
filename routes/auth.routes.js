@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 const Session = require("../models/Session.model");
-const SESSION_EXPIRATION = 1000 * 60 * 30; //Sessions live for 30 minutes
+const SESSION_EXPIRATION = 1000 * 60 * 60 * 24; //Sessions live for 1 day
 
 const PassHash = require("../models/PassHash.model");
 
