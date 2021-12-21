@@ -33,7 +33,7 @@ router.post("/update/:id", async (req, res) => {
     return res.status(200).json({ message: "Updated Bug"});
   })
   .catch((error) =>
-    res.status(500).json({ errorMessage: "Bug Creation Failed.", error: error })
+    res.status(500).json({ errorMessage: "Bug Update Failed.", error: error })
   );
 });
 

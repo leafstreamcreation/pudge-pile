@@ -24,10 +24,10 @@ module.exports = (app) => {
     cors({
       credentials: true,
       origin: function (origin, callback) {
-        if (safeList.indexOf(origin) !== -1) {
-          callback(null, true)
+        if (safeList.indexOf(origin) !== -1 || (process.env.DEV && !origin)) {
+          callback(null, true);
         } else {
-          callback(new Error('Not allowed by CORS'))
+          callback(new Error('Not allowed by CORS'));
         }
       }
     })
