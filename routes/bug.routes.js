@@ -13,11 +13,11 @@ router.get("/index", async (req, res) => {
 });
 
 router.post("/create", (req, res) => {
-  const { title, details, conditions } = req.body;
+  const { title, details, conditions, occurred } = req.body;
   if (!title) return res.status(400).json({ error: "no title provided" });
   //sanitize the text here
   //then save it
-  Bug.create({ title, details, conditions }).then((bug) => {
+  Bug.create({ title, details, conditions, occurred }).then((bug) => {
     return res.status(200).json(bug);
   })
   .catch((error) =>
@@ -26,10 +26,10 @@ router.post("/create", (req, res) => {
 });
 
 router.post("/update/:id", async (req, res) => {
-  const { title, details, conditions } = req.body;
+  const { title, details, conditions, occurred } = req.body;
   //sanitize the text here
   //then save it
-  Bug.findByIdAndUpdate(req.params.id, { title, details, conditions }).then(() => {
+  Bug.findByIdAndUpdate(req.params.id, { title, details, conditions, occurred }).then(() => {
     return res.status(200).json({ message: "Updated Bug"});
   })
   .catch((error) =>

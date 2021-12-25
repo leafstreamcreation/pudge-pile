@@ -5,6 +5,7 @@ const bugSchema = new Schema({
   title: { type: String, required: true },
   details: { type: String },
   conditions: { type: [String] },
+  occurred: { type: Date, default: () => new Date(Date.now()).toISOString(), },
 }, {
   timestamps: true,
 });
