@@ -18,7 +18,7 @@ router.post("/create", (req, res) => {
   if (!text) return res.status(400).json({ error: "no text provided" });
   //sanitize the text here
   //then save it
-  Task.create({ text }).then((task) => {
+  Task.create({ text, updates: [new Date()] }).then((task) => {
     return res.status(200).json(task);
   })
   .catch((error) =>
